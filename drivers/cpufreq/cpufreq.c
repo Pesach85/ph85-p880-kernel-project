@@ -2220,32 +2220,18 @@ int cpufreq_set_gov(char *target_gov, unsigned int cpu)
 	if (target_gov == NULL)
 		return -EINVAL;
 
-	/* Get current governor */
+	/* Get current governer */
 	cur_policy = cpufreq_cpu_get(cpu);
 	if (!cur_policy)
 		return -EINVAL;
 
-	if (lock_policy_rwsem_read(cur_policy->cpu) < 0) {
-		ret = -EINVAL;
-		goto err_out;
-	}
-
-	if (cur_policy->governor)
-		ret = strncmp(cur_policy->governor->name, target_gov,
-					strlen(target_gov));
-	else {
-		unlock_policy_rwsem_read(cur_policy->cpu);
-		ret = -EINVAL;
-		goto err_out;
-	}
-	unlock_policy_rwsem_read(cur_policy->cpu);
-
-	if (!ret) {
-		pr_debug(" Target governer & current governer is same\n");
+	new_policy = *cur_policy;
+	if (!strncmp(cur_policy->governor->name, target_gov,
+			strlen(target_gov))) {
+		/* Target governer & current governer is same */
 		ret = -EINVAL;
 		goto err_out;
 	} else {
-		new_policy = *cur_policy;
 		if (cpufreq_parse_governor(target_gov, &new_policy.policy,
 				&new_policy.governor)) {
 			ret = -EINVAL;
@@ -2269,52 +2255,6 @@ err_out:
 	return ret;
 }
 EXPORT_SYMBOL(cpufreq_set_gov);
-
-/*
- *	cpufreq_current_gov - return current governor for the cpu
- *	@cpu: CPU whose governor needs to be changed
- *	@buf: buffer for current governor
- */
-ssize_t cpufreq_current_gov(char *buf, unsigned int cpu)
-{
-	int ret = 0;
-	struct cpufreq_policy *policy;
-
-	if (cpu >= nr_cpu_ids)
-		return -EINVAL;
-
-	/* Get current governor */
-	policy = cpufreq_cpu_get(cpu);
-	if (!policy)
-		return -EINVAL;
-
-	if (lock_policy_rwsem_read(policy->cpu) < 0) {
-		ret = -EINVAL;
-		goto err_out;
-	}
-
-	if (policy->policy == CPUFREQ_POLICY_POWERSAVE) {
-		ret = sprintf(buf, "powersave\n");
-	} else if (policy->policy == CPUFREQ_POLICY_PERFORMANCE) {
-		ret = sprintf(buf, "performance\n");
-	} else if (policy->governor) {
-		ret = scnprintf(buf, CPUFREQ_NAME_LEN, "%s",
-				policy->governor->name);
-	} else {
-		/* No gov set for this online cpu.
-		 * If we are here, require serious
-		 * debugging hence setting as pr_error.
-		 */
-		pr_err("No gov for online cpu:%d\n", cpu);
-		ret = -EINVAL;
-	}
-	unlock_policy_rwsem_read(policy->cpu);
-err_out:
-	cpufreq_cpu_put(policy);
-	return ret;
-
-}
-EXPORT_SYMBOL(cpufreq_current_gov);
 
 static int __cpuinit cpufreq_cpu_callback(struct notifier_block *nfb,
 					unsigned long action, void *hcpu)
