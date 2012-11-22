@@ -608,6 +608,7 @@ void elv_requeue_request(struct request_queue *q, struct request *rq)
  */
 int elv_reinsert_request(struct request_queue *q, struct request *rq)
 {
+
 	int res;
 
 	if (!q->elevator->elevator_type->ops.elevator_reinsert_req_fn)

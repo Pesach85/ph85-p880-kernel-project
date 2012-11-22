@@ -607,34 +607,27 @@ static int zram_make_request(struct request_queue *queue, struct bio *bio)
 {
 	struct zram *zram = queue->queuedata;
 
-	if (unlikely(!zram->init_done) && zram_init_device(zram))
-		goto error;
-
-	down_read(&zram->init_lock);
-	if (unlikely(!zram->init_done))
-		goto error_unlock;
-
 	if (!valid_io_request(zram, bio)) {
 		zram_stat64_inc(zram, &zram->stats.invalid_io);
-		goto error_unlock;
+		bio_io_error(bio);
+		return 0;
+	}
+
+	if (unlikely(!zram->init_done) && zram_init_device(zram)) {
+		bio_io_error(bio);
+		return 0;
 	}
 
 	__zram_make_request(zram, bio, bio_data_dir(bio));
-	up_read(&zram->init_lock);
 
-	return 0;
-
-error_unlock:
-	up_read(&zram->init_lock);
-error:
-	bio_io_error(bio);
 	return 0;
 }
 
-void __zram_reset_device(struct zram *zram)
+void zram_reset_device(struct zram *zram)
 {
 	size_t index;
 
+	mutex_lock(&zram->init_lock);
 	zram->init_done = 0;
 
 	/* Free various per-device buffers */
@@ -671,14 +664,9 @@ void __zram_reset_device(struct zram *zram)
 	memset(&zram->stats, 0, sizeof(zram->stats));
 
 	zram->disksize = 0;
+	mutex_unlock(&zram->init_lock);
 }
 
-void zram_reset_device(struct zram *zram)
-{
-	down_write(&zram->init_lock);
-	__zram_reset_device(zram);
-	up_write(&zram->init_lock);
-}
 
 int zram_init_device(struct zram *zram)
 {
