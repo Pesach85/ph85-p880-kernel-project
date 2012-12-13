@@ -113,6 +113,8 @@ int is_tegra_batteryVerified(void);
 
 extern unsigned long tegra_bootloader_fb_start;
 extern unsigned long tegra_bootloader_fb_size;
+extern unsigned long tegra_bootloader_fb2_start;
+extern unsigned long tegra_bootloader_fb2_size;
 extern unsigned long tegra_fb_start;
 extern unsigned long tegra_fb_size;
 extern unsigned long tegra_fb2_start;
