@@ -572,7 +572,11 @@ CONFIG_BOUNCE=y
 CONFIG_VIRT_TO_BUS=y
 # CONFIG_KSM is not set
 CONFIG_DEFAULT_MMAP_MIN_ADDR=4096
+<<<<<<< HEAD:arch/arm/configs/lx_rev_a_defconfig
 # CONFIG_CLEANCACHE is not set
+=======
+CONFIG_CLEANCACHE=y
+>>>>>>> 17399cd... Zram: updated zram to a newer version. Added support to handle tweaks for android. Adds noticable improves to application launching:arch/arm/configs/tegra_smba1002_defconfig
 CONFIG_FORCE_MAX_ZONEORDER=11
 CONFIG_ALIGNMENT_TRAP=y
 # CONFIG_UACCESS_WITH_MEMCPY is not set
@@ -2817,8 +2821,17 @@ CONFIG_IIO=y
 #
 # Triggers - standalone
 #
+<<<<<<< HEAD:arch/arm/configs/lx_rev_a_defconfig
 # CONFIG_XVMALLOC is not set
 # CONFIG_ZRAM is not set
+=======
+CONFIG_XVMALLOC=y
+CONFIG_ZRAM=m
+# CONFIG_ZRAM_DEBUG is not set
+CONFIG_ZRAM_FOR_ANDROID=y
+CONFIG_ZRAM_LZO=y
+CONFIG_ZCACHE=y
+>>>>>>> 17399cd... Zram: updated zram to a newer version. Added support to handle tweaks for android. Adds noticable improves to application launching:arch/arm/configs/tegra_smba1002_defconfig
 # CONFIG_FB_SM7XX is not set
 # CONFIG_VIDEO_DT3155 is not set
 # CONFIG_CRYSTALHD is not set

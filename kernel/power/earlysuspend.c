@@ -42,12 +42,11 @@ enum {
 	DEBUG_SUSPEND = 1U << 2,
 	DEBUG_VERBOSE = 1U << 3,
 };
-
-
- 
-static int debug_mask = DEBUG_USER_STATE|DEBUG_SUSPEND;  //[20110131:geayoung.baek] suspend,resume monitoring
-
-module_param_named(debug_mask, debug_mask, int, S_IRUGO | S_IWUSR | S_IWGRP);
+static int debug_mask = DEBUG_USER_STATE;
+#ifdef CONFIG_ZRAM_FOR_ANDROID	
+atomic_t optimize_comp_on = ATOMIC_INIT(0);	
+EXPORT_SYMBOL(optimize_comp_on);	
+#endif /* CONFIG_ZRAM_FOR_ANDROID */
 
 static DEFINE_MUTEX(early_suspend_lock);
 static LIST_HEAD(early_suspend_handlers);
@@ -101,6 +100,9 @@ static void early_suspend(struct work_struct *work)
 
 	mutex_lock(&early_suspend_lock);
 	spin_lock_irqsave(&state_lock, irqflags);
+#ifdef CONFIG_ZRAM_FOR_ANDROID	
+atomic_set(&optimize_comp_on, 1);	
+#endif /* CONFIG_ZRAM_FOR_ANDROID */
 	if (state == SUSPEND_REQUESTED)
 		state |= SUSPENDED;
 	else
@@ -159,6 +161,10 @@ static void late_resume(struct work_struct *work)
 #if LGE_EARLYSUSPEND_DEBUG
 	--lateResumeCount;
 #endif
+
+#ifdef CONFIG_ZRAM_FOR_ANDROID	
+	atomic_set(&optimize_comp_on, 0);	
+#endif /* CONFIG_ZRAM_FOR_ANDROID */
 
 	if (state == SUSPENDED)
 		state &= ~SUSPENDED;
