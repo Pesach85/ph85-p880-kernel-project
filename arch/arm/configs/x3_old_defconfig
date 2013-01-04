@@ -2812,8 +2812,18 @@ CONFIG_IIO=y
 #
 # Triggers - standalone
 #
+<<<<<<< HEAD:arch/arm/configs/x3_old_defconfig
 # CONFIG_XVMALLOC is not set
 # CONFIG_ZRAM is not set
+=======
+CONFIG_XVMALLOC=y
+CONFIG_ZRAM=m
+# CONFIG_ZRAM_DEBUG is not set
+CONFIG_ZRAM_FOR_ANDROID=y
+# CONFIG_ZRAM_LZO is not set
+CONFIG_ZRAM_SNAPPY=y
+CONFIG_ZCACHE=y
+>>>>>>> 0650816... smba1002: added google's snappy compression for zram. adds a nice io boost:arch/arm/configs/tegra_smba1002_defconfig
 # CONFIG_FB_SM7XX is not set
 # CONFIG_VIDEO_DT3155 is not set
 # CONFIG_CRYSTALHD is not set
@@ -2833,6 +2843,8 @@ CONFIG_IIO=y
 # CONFIG_TOUCHSCREEN_SYNAPTICS_I2C_RMI4 is not set
 # CONFIG_ALTERA_STAPL is not set
 # CONFIG_MFD_NVEC is not set
+CONFIG_SNAPPY_COMPRESS=y
+CONFIG_SNAPPY_DECOMPRESS=y
 CONFIG_CLKDEV_LOOKUP=y
 CONFIG_CLKSRC_MMIO=y
 CONFIG_IOMMU_SUPPORT=y
