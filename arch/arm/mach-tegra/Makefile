@@ -210,6 +210,7 @@ obj-y                                   += eeprom-wifi-mac.o
 
 obj-${CONFIG_TEGRA_BB_XMM_POWER}        += baseband-xmm-power.o
 obj-${CONFIG_TEGRA_BB_XMM_POWER2}       += baseband-xmm-power2.o
+
 obj-$(CONFIG_FORCE_FAST_CHARGE)     	+= fastchg.o
 #===============#
 #  For the LGE  #
@@ -221,3 +222,6 @@ obj-$(CONFIG_MACH_VU10)			+= lge/vu10/
 subdir-ccflags-$(CONFIG_MACH_X3)	+= -Iarch/arm/mach-tegra/lge/x3/include
 subdir-ccflags-$(CONFIG_MACH_LX)	+= -Iarch/arm/mach-tegra/lge/lx/include
 subdir-ccflags-$(CONFIG_MACH_VU10)	+= -Iarch/arm/mach-tegra/lge/vu10/include
+
+obj-$(CONFIG_TEGRA3_RQ_STATS)		+= tegra_rq_stats.o
+
