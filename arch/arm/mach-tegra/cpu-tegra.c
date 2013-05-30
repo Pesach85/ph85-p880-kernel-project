@@ -485,6 +485,7 @@ int tegra_update_cpu_speed(unsigned long rate)
 	int ret = 0;
 	struct cpufreq_freqs freqs;
 
+	unsigned long rate_save = rate;
 	freqs.old = tegra_getspeed(0);
 	freqs.new = rate;
 
@@ -494,6 +495,26 @@ int tegra_update_cpu_speed(unsigned long rate)
 
 	if (freqs.old == freqs.new)
 		return ret;
+
+
+	if (freqs.new < rate_save && rate_save >= 880000) {
+		if (is_lp_cluster()) {
+
+			/* set rate to max of LP mode */
+			ret = clk_set_rate(cpu_clk, 475000 * 1000);
+
+                        MF_DEBUG("00UP0039");
+			/* change to g mode */
+			clk_set_parent(cpu_clk, cpu_g_clk);
+
+                        MF_DEBUG("00UP0040");
+			/* restore the target frequency, and
+			 * let the rest of the function handle
+			 * the frequency scale up
+			 */
+			freqs.new = rate_save;
+		}
+	}
 
 	/*
 	 * Vote on memory bus frequency based on cpu frequency
@@ -537,7 +558,11 @@ int tegra_update_cpu_speed(unsigned long rate)
 		tegra_update_mselect_rate(freqs.new);
 	}
 
-	return 0;
+        MF_DEBUG("00UP0046");
+error:  
+        MF_DEBUG("00UP0047");
+
+	return ret;
 }
 
 unsigned int tegra_count_slow_cpus(unsigned long speed_limit)
