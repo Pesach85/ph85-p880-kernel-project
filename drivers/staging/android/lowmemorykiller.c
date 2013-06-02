@@ -61,7 +61,7 @@ extern int compact_nodes();
 #define lowmem_print(level, x...)			\
 	do {						\
 		if (lowmem_debug_level >= (level))	\
-			printk(x);			\
+			printk("[LMK]" x);			\
 	} while (0)
 
 static int
