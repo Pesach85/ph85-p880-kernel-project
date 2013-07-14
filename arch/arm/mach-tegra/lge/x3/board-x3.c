@@ -83,21 +83,13 @@ void x3_setup_reboot(void) {}
 #ifdef CONFIG_TEGRA_THERMAL_THROTTLE
 static struct throttle_table throttle_freqs_tj[] = {
 	      /*    CPU,    CBUS,    SCLK,     EMC */
+              { 1500000,  NO_CAP,  NO_CAP,  NO_CAP },
               { 1300000,  NO_CAP,  NO_CAP,  NO_CAP },
 	      { 1000000,  NO_CAP,  NO_CAP,  NO_CAP },
-	      {  760000,  NO_CAP,  NO_CAP,  NO_CAP },
-	      {  760000,  NO_CAP,  NO_CAP,  NO_CAP },
-	      {  620000,  NO_CAP,  NO_CAP,  NO_CAP },
-	      {  620000,  NO_CAP,  NO_CAP,  NO_CAP },
-	      {  620000,  437000,  NO_CAP,  NO_CAP },
-	      {  620000,  352000,  NO_CAP,  NO_CAP },
-	      {  475000,  352000,  NO_CAP,  NO_CAP },
-	      {  475000,  352000,  NO_CAP,  NO_CAP },
-              {  475000,  352000,  250000,  375000 },
-              {  475000,  352000,  250000,  375000 },
-              {  475000,  247000,  204000,  375000 },
-              {  475000,  247000,  204000,  375000 },
-              {  475000,  247000,  204000,  375000 },
+	      {  900000,  NO_CAP,  NO_CAP,  NO_CAP },
+	      {  800000,  NO_CAP,  NO_CAP,  NO_CAP },
+	      {  700000,  NO_CAP,  NO_CAP,  NO_CAP },
+	      {  600000,  NO_CAP,  NO_CAP,  NO_CAP },
 #if 0 /*                                                               */
 	{ CPU_THROT_LOW,  247000,  204000,  102000 },
 #endif
@@ -107,21 +99,14 @@ static struct throttle_table throttle_freqs_tj[] = {
 #ifdef CONFIG_TEGRA_SKIN_THROTTLE
 static struct throttle_table throttle_freqs_tskin[] = {
 	      /*    CPU,    CBUS,    SCLK,     EMC */
+              { 1500000,  NO_CAP,  NO_CAP,  NO_CAP },
               { 1300000,  NO_CAP,  NO_CAP,  NO_CAP },
 	      { 1000000,  NO_CAP,  NO_CAP,  NO_CAP },
-	      {  760000,  NO_CAP,  NO_CAP,  NO_CAP },
-	      {  760000,  NO_CAP,  NO_CAP,  NO_CAP },
-	      {  620000,  NO_CAP,  NO_CAP,  NO_CAP },
-	      {  620000,  NO_CAP,  NO_CAP,  NO_CAP },
-	      {  620000,  437000,  NO_CAP,  NO_CAP },
-	      {  620000,  352000,  NO_CAP,  NO_CAP },
-	      {  475000,  352000,  NO_CAP,  NO_CAP },
-	      {  475000,  352000,  NO_CAP,  NO_CAP },
-              {  475000,  352000,  250000,  375000 },
-              {  475000,  352000,  250000,  375000 },
-              {  475000,  247000,  204000,  375000 },
-              {  475000,  247000,  204000,  375000 },
-              {  475000,  247000,  204000,  375000 },
+	      {  900000,  NO_CAP,  NO_CAP,  NO_CAP },
+	      {  800000,  NO_CAP,  NO_CAP,  NO_CAP },
+	      {  700000,  NO_CAP,  NO_CAP,  NO_CAP },
+	      {  600000,  NO_CAP,  NO_CAP,  NO_CAP },
+	      
 #if 0 /*                                                               */
 	{ CPU_THROT_LOW,  247000,  204000,  102000 },
 #endif
@@ -164,12 +149,12 @@ static struct tegra_thermal_data thermal_data = {
 #endif
 #ifdef CONFIG_TEGRA_SKIN_THROTTLE
 	.skin_device_id = THERMAL_DEVICE_ID_SKIN,
-	.temp_throttle_skin = 48000,
+	.temp_throttle_skin = 50000,
         .tc1_skin = 5,
         .tc2_skin = 1,
         .passive_delay_skin = 4000,
         .skin_temp_offset = 9793,
-        .skin_period = 90,
+        .skin_period = 200,
 	.skin_devs_size = 2,
         .skin_devs = {
                 {

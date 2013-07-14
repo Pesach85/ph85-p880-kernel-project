@@ -510,7 +510,7 @@ static const struct tegra_emc_table x3_emc_tables_k4p8g304eb[] =
 	},
 	{
 		0x32,       /* Rev 3.2 */
-		600000,     /* SDRAM frequency */
+		566000,     /* SDRAM frequency */
 		{
 			0x0000001f, /* EMC_RC */
 			0x00000045, /* EMC_RFC */
@@ -1110,7 +1110,7 @@ static const struct tegra_emc_table x3_emc_tables_k4p8g304eb[] =
 	},
 	{
 		0x31,       /* Rev 3.1 */
-		400000,     /* SDRAM frequency */
+		600000,     /* SDRAM frequency */
 		{
 			0x00000017, /* EMC_RC */
 			0x00000033, /* EMC_RFC */
@@ -1235,7 +1235,7 @@ static const struct tegra_emc_table x3_emc_tables_k4p8g304eb[] =
 static const struct tegra_emc_table x3_emc_tables_k4p8g304eb_v32[] = {
 	{
 		0x32,       /* Rev 3.2 */
-		12750,      /* SDRAM frequency */
+		25500,      /* SDRAM frequency */
 		{
 			0x00000000, /* EMC_RC */
 			0x00000001, /* EMC_RFC */
@@ -1355,7 +1355,7 @@ static const struct tegra_emc_table x3_emc_tables_k4p8g304eb_v32[] = {
 	},
 	{
 		0x32,       /* Rev 3.2 */
-		25500,      /* SDRAM frequency */
+		51000,      /* SDRAM frequency */
 		{
 			0x00000001, /* EMC_RC */
 			0x00000003, /* EMC_RFC */
@@ -1475,7 +1475,7 @@ static const struct tegra_emc_table x3_emc_tables_k4p8g304eb_v32[] = {
 	},
 	{
 		0x32,       /* Rev 3.2 */
-		51000,      /* SDRAM frequency */
+		102000,      /* SDRAM frequency */
 		{
 			0x00000003, /* EMC_RC */
 			0x00000006, /* EMC_RFC */
@@ -1595,7 +1595,7 @@ static const struct tegra_emc_table x3_emc_tables_k4p8g304eb_v32[] = {
 	},
 	{
 		0x32,       /* Rev 3.2 */
-		102000,     /* SDRAM frequency */
+		204000,     /* SDRAM frequency */
 		{
 			0x00000006, /* EMC_RC */
 			0x0000000d, /* EMC_RFC */
@@ -1715,7 +1715,7 @@ static const struct tegra_emc_table x3_emc_tables_k4p8g304eb_v32[] = {
 	},
 	{
 		0x32,       /* Rev 3.2 */
-		204000,     /* SDRAM frequency */
+		408000,     /* SDRAM frequency */
 		{
 			0x0000000c, /* EMC_RC */
 			0x0000001a, /* EMC_RFC */
@@ -1835,7 +1835,7 @@ static const struct tegra_emc_table x3_emc_tables_k4p8g304eb_v32[] = {
 	},
 	{
 		0x32,       /* Rev 3.2 */
-		408000,     /* SDRAM frequency */
+		533000,     /* SDRAM frequency */
 		{
 			0x0000000f, /* EMC_RC */
 			0x00000022, /* EMC_RFC */
@@ -1955,7 +1955,7 @@ static const struct tegra_emc_table x3_emc_tables_k4p8g304eb_v32[] = {
 	},
 	{
 		0x32,       /* Rev 3.2 */
-		612000,     /* SDRAM frequency */
+		600000,     /* SDRAM frequency */
 		{
 			0x0000001f, /* EMC_RC */
 			0x00000045, /* EMC_RFC */
