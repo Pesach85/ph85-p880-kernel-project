@@ -1106,6 +1106,11 @@ static int cpufreq_add_dev_policy(unsigned int cpu,
 #ifdef CONFIG_SMP
 	unsigned long flags;
 	unsigned int j;
+
+// maxwen: we have already set the policy that we
+// want to use in cpufreq_add_dev
+// this makes sure that al cpus use the same governor
+
 #if 0
 #ifdef CONFIG_HOTPLUG_CPU
 	struct cpufreq_governor *gov;
@@ -1355,8 +1360,11 @@ static int cpufreq_add_dev(struct sys_device *sys_dev)
 		}
 	}
 #endif
-	if (!found)
-		policy->governor = CPUFREQ_DEFAULT_GOVERNOR;
+	f (!found){
+     policy->governor = CPUFREQ_DEFAULT_GOVERNOR;
+  }
+
+  printk(KERN_ERR "maxwen: set govener for cpu %d to %s\n", cpu, policy->governor->name); 
 	/* call driver. From then on the cpufreq must be able
 	 * to accept all calls to ->verify and ->setpolicy for this CPU
 	 */
@@ -2478,7 +2486,7 @@ static int cpu_freq_notify(struct notifier_block *b,
 			   unsigned long l, void *v)
 {
 	int cpu;
-	dprintk("PM QoS %s %lu\n",
+	pr_info("PM QoS PM_QOS_CPU_FREQ %s %lu\n",
 		b == &min_freq_notifier ? "min" : "max", l);
 	for_each_online_cpu(cpu) {
 		struct cpufreq_policy *policy = cpufreq_cpu_get(cpu);
