@@ -16,6 +16,8 @@
 
 #include "power.h"
 
+#define TIMEOUT    50
+
 /*
  * If set, the suspend/hibernate code will abort transitions to a sleep state
  * if wakeup events are registered during or immediately before the transition.
