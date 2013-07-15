@@ -1360,7 +1360,7 @@ static int cpufreq_add_dev(struct sys_device *sys_dev)
 		}
 	}
 #endif
-	f (!found){
+	if (!found){
      policy->governor = CPUFREQ_DEFAULT_GOVERNOR;
   }
 
