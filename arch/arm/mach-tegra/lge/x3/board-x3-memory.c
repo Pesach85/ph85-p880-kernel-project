@@ -1110,7 +1110,7 @@ static const struct tegra_emc_table x3_emc_tables_k4p8g304eb[] =
 	},
 	{
 		0x31,       /* Rev 3.1 */
-		600000,     /* SDRAM frequency */
+		566000,     /* SDRAM frequency */
 		{
 			0x00000017, /* EMC_RC */
 			0x00000033, /* EMC_RFC */

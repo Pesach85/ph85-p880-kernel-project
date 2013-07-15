@@ -57,7 +57,7 @@ unsigned long tegra_emc_bw_min_rate;
 
 #define EMC_MIN_RATE_DDR3		25500000
 #define EMC_STATUS_UPDATE_TIMEOUT	100
-#define TEGRA_EMC_TABLE_MAX_SIZE 	16
+#define TEGRA_EMC_TABLE_MAX_SIZE 	32
 
 enum {
 	DLL_CHANGE_NONE = 0,

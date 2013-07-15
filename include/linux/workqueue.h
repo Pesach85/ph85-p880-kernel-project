@@ -56,7 +56,8 @@ enum {
 
 	/* special cpu IDs */
 	WORK_CPU_UNBOUND	= NR_CPUS,
-	WORK_CPU_LAST		= NR_CPUS + 1,
+	WORK_CPU_NONE		= NR_CPUS + 1,
+	WORK_CPU_LAST		= WORK_CPU_NONE,
 
 	/*
 	 * Reserve 7 bits off of cwq pointer w/ debugobjects turned
@@ -68,7 +69,7 @@ enum {
 
 	WORK_STRUCT_FLAG_MASK	= (1UL << WORK_STRUCT_FLAG_BITS) - 1,
 	WORK_STRUCT_WQ_DATA_MASK = ~WORK_STRUCT_FLAG_MASK,
-	WORK_STRUCT_NO_CPU	= WORK_CPU_LAST << WORK_STRUCT_FLAG_BITS,
+	WORK_STRUCT_NO_CPU	= WORK_CPU_NONE << WORK_STRUCT_FLAG_BITS,
 
 	/* bit mask for work_busy() return values */
 	WORK_BUSY_PENDING	= 1 << 0,

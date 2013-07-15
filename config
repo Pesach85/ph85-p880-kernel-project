@@ -1,0 +1,17 @@
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = false
+	logallrefupdates = true
+[remote "origin"]
+	url = https://github.com/Pesach85/ph85-p880-kernel-project
+	fetch = +refs/heads/*:refs/remotes/origin/*
+[remote "endel"]
+	url = https://github.com/iodak/LG_X3_P880_v20a
+	fetch = +refs/heads/*:refs/remotes/endel/*
+[remote "endel2"]
+	url = https://github.com/n3ocort3x/endeavoru_3.14
+	fetch = +refs/heads/*:refs/remotes/endel2/*
+[remote "endel3"]
+	url = https://github.com/alienmind-org/endeavoru_3.14
+	fetch = +refs/heads/*:refs/remotes/endel3/*

@@ -34,8 +34,8 @@
 #include <linux/pm_qos_params.h>
 #include <mach/tegra_usb_modem_power.h>
 
-#define BOOST_CPU_FREQ_MIN	1200000
-#define BOOST_CPU_FREQ_TIMEOUT	5000
+#define BOOST_CPU_FREQ_MIN	1020000
+#define BOOST_CPU_FREQ_TIMEOUT	2000
 
 #define WAKELOCK_TIMEOUT_FOR_USB_ENUM		(HZ * 10)
 #define WAKELOCK_TIMEOUT_FOR_REMOTE_WAKE	(HZ)

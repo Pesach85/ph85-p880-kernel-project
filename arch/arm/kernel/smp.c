@@ -567,6 +567,10 @@ static void ipi_cpu_stop(unsigned int cpu)
 	local_fiq_disable();
 	local_irq_disable();
 
+#ifdef CONFIG_HOTPLUG_CPU
+       cpu_die();
+#endif
+
 	while (1)
 		cpu_relax();
 }

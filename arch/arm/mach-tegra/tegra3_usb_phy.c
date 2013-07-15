@@ -3054,3 +3054,4 @@ int tegra3_usb_phy_init_ops(struct tegra_usb_phy *phy)
 
 	return 0;
 }
+

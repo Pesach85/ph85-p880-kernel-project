@@ -88,7 +88,7 @@ static DEFINE_PER_CPU(int, cpufreq_policy_cpu);
 static DEFINE_PER_CPU(struct rw_semaphore, cpu_policy_rwsem);
 
 #define lock_policy_rwsem(mode, cpu)					\
-static int lock_policy_rwsem_##mode					\
+int lock_policy_rwsem_##mode					\
 (int cpu)								\
 {									\
 	int policy_cpu = per_cpu(cpufreq_policy_cpu, cpu);		\
@@ -113,7 +113,7 @@ static void unlock_policy_rwsem_read(int cpu)
 	up_read(&per_cpu(cpu_policy_rwsem, policy_cpu));
 }
 
-static void unlock_policy_rwsem_write(int cpu)
+void unlock_policy_rwsem_write(int cpu)
 {
 	int policy_cpu = per_cpu(cpufreq_policy_cpu, cpu);
 	BUG_ON(policy_cpu == -1);
@@ -543,13 +543,44 @@ static ssize_t store_scaling_governor(struct cpufreq_policy *policy,
 	char	str_governor[16];
 	struct cpufreq_policy new_policy;
 
-	ret = cpufreq_get_policy(&new_policy, policy->cpu);
-	if (ret)
-		return ret;
+#ifdef CONFIG_HOTPLUG_CPU
+  int cpu;
+#endif
 
 	ret = sscanf(buf, "%15s", str_governor);
 	if (ret != 1)
 		return -EINVAL;
+
+#ifdef CONFIG_HOTPLUG_CPU
+	for_each_present_cpu(cpu) {
+		ret = cpufreq_get_policy(&new_policy, cpu);
+		if (ret){
+			continue;
+		}
+
+		if (cpufreq_parse_governor(str_governor, &new_policy.policy,
+						&new_policy.governor)){
+
+			continue;
+		}
+
+		/* Do not use cpufreq_set_policy here or the user_policy.max
+	   	will be wrongly overridden */
+		ret = __cpufreq_set_policy(policy, &new_policy);
+
+		policy->user_policy.policy = policy->policy;
+		policy->user_policy.governor = policy->governor;
+
+		if (ret){
+			continue;
+		}
+		printk(KERN_ERR "maxwen:setting govenor %s on cpu %d ok\n", str_governor, cpu);
+	}
+#else 
+
+        ret = cpufreq_get_policy(&new_policy, policy->cpu);
+	if (ret)
+		return ret;
 
 	if (cpufreq_parse_governor(str_governor, &new_policy.policy,
 						&new_policy.governor))
@@ -564,7 +595,7 @@ static ssize_t store_scaling_governor(struct cpufreq_policy *policy,
 
 	if (ret)
 		return ret;
-	else
+#endif
 		return count;
 }
 
@@ -1093,6 +1124,7 @@ static int cpufreq_add_dev_policy(unsigned int cpu,
 #ifdef CONFIG_SMP
 	unsigned long flags;
 	unsigned int j;
+#if 0
 #ifdef CONFIG_HOTPLUG_CPU
 	struct cpufreq_governor *gov;
 
@@ -1103,7 +1135,7 @@ static int cpufreq_add_dev_policy(unsigned int cpu,
 		       policy->governor->name, cpu);
 	}
 #endif
-
+#endif
 	for_each_cpu(j, policy->cpus) {
 		struct cpufreq_policy *managed_policy;
 
