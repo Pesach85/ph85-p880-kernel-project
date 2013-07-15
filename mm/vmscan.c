@@ -3439,9 +3439,6 @@ static void scan_zone_unevictable_pages(struct zone *zone)
 
 			prefetchw_prev_lru_page(page, l_unevictable, flags);
 
-			if (likely(PageLRU(page) && PageUnevictable(page)))
-				check_move_unevictable_page(page, zone);
-
 			unlock_page(page);
 		}
 		spin_unlock_irq(&zone->lru_lock);
