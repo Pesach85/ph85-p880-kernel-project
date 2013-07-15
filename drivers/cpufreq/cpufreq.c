@@ -543,14 +543,15 @@ static ssize_t store_scaling_governor(struct cpufreq_policy *policy,
 	char	str_governor[16];
 	struct cpufreq_policy new_policy;
 
-#ifdef CONFIG_HOTPLUG_CPU
-  int cpu;
-#endif
 
 	ret = sscanf(buf, "%15s", str_governor);
 	if (ret != 1)
 		return -EINVAL;
-
+/*
+The following script has been disabled because cause too much battery drain 
+and does not improve in a considerable manner the performance. Pesach85
+*/ 
+#if 0 
 #ifdef CONFIG_HOTPLUG_CPU
 	for_each_present_cpu(cpu) {
 		ret = cpufreq_get_policy(&new_policy, cpu);
@@ -595,6 +596,7 @@ static ssize_t store_scaling_governor(struct cpufreq_policy *policy,
 
 	if (ret)
 		return ret;
+#endif
 #endif
 		return count;
 }
