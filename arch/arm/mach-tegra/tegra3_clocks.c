@@ -4897,25 +4897,6 @@ static struct cpufreq_frequency_table freq_table_1p6GHz[] = {
 	{15, CPUFREQ_TABLE_END },
 };
 
-static struct cpufreq_frequency_table freq_table_1p7GHz[] = {
-	{ 0,   51000 },
-	{ 1,  102000 },
-        { 2,  204000 }, 
-	{ 3,  306000 },
-	{ 4,  408000 },
-	{ 5,  612000 },
-	{ 6,  714000 },
-	{ 7,  816000 },
-	{ 8,  918000 },
-	{ 9, 1020000 },
-	{10, 1224000 },
-	{11, 1326000 },
-	{12, 1428000 },
-	{13, 1530000 },
-        {14, 1632000 },
-	{15, 1683000 },
-	{16, CPUFREQ_TABLE_END },
-};
 
 static struct tegra_cpufreq_table_data cpufreq_tables[] = {
 	{ freq_table_300MHz, 0,  1 },
@@ -4923,7 +4904,6 @@ static struct tegra_cpufreq_table_data cpufreq_tables[] = {
 	{ freq_table_1p3GHz, 2, 15 },
 	{ freq_table_1p4GHz, 2, 15 },
 	{ freq_table_1p6GHz, 2, 16 },
-	{ freq_table_1p7GHz, 2, 17 },
 };
 
 static int clip_cpu_rate_limits(
