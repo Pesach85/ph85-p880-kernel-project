@@ -779,12 +779,12 @@ static ssize_t store_lp_UV_mV_table(struct cpufreq_policy *policy, char *buf, si
 	struct clk *clk_emc = tegra_get_clock_by_name("emc");
 	unsigned long volt_cur[cpu_clk_lp->dvfs->num_freqs-3];
 	int ret = 0;
-	
+
 	ret = sscanf(buf, "%lu %lu %lu %lu %lu %lu", &volt_cur[5], &volt_cur[4], &volt_cur[3], &volt_cur[2], &volt_cur[1], &volt_cur[0]);
 
 	if (ret != 6)
 	return -EINVAL;
-	
+
 	for(i = 0; i < 6; i++){
 		if(volt_cur[i] < 900){
 		printk(KERN_DEBUG "lp_voltage_control: You set too low voltage (%lu) set min to 900mV\n", volt_cur[i]);
@@ -804,7 +804,7 @@ static ssize_t store_lp_UV_mV_table(struct cpufreq_policy *policy, char *buf, si
 }
 #endif
 
-						
+
 #ifdef CONFIG_GPU_OVERCLOCK
 static ssize_t show_gpu_overclock(struct cpufreq_policy *policy, char *buf) {
 
@@ -884,7 +884,7 @@ static ssize_t store_gpu_overclock(struct cpufreq_policy *policy, const char *bu
 				printk(KERN_DEBUG "GPU_OC: Voltages are set to: %i mV for clock: %lu MHz\n", clk_3d->dvfs->millivolts[i], freq_cur[i] );
 				}
 			}
-			
+
 
 			clk_vde->max_rate = freq_cur[5]*1000000;
 			clk_mpe->max_rate = freq_cur[5]*1000000;
@@ -915,7 +915,7 @@ static ssize_t store_gpu_overclock(struct cpufreq_policy *policy, const char *bu
 			else
 				clk_pll_c->dvfs->freqs[i] = freq_cur[5]*1000000;
 			}
-				
+
 			for(i = 0; i < 6; i++) {
 			clk_vde->dvfs->freqs[i] = freq_cur[i]*1000000;
 			clk_mpe->dvfs->freqs[i] = freq_cur[i]*1000000;

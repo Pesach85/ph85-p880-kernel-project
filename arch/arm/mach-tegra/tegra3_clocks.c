@@ -4821,10 +4821,37 @@ void tegra_edp_throttle_cpu_now(u8 factor)
  * tables are provided, since there is no clock scaling on FPGA at all).
  */
 
-static struct cpufreq_frequency_table freq_table_300MHz[] = {
-	{ 0, 204000 },
-	{ 1, 306000 },
+static struct cpufreq_frequency_table freq_table_100MHz[] = {
+	{ 0,  51000 },
+	{ 1, 102000 },
 	{ 2, CPUFREQ_TABLE_END },
+};
+
+static struct cpufreq_frequency_table freq_table_200MHz[] = {
+	{ 0, 102000 },
+	{ 1, 204000 },
+	{ 2, CPUFREQ_TABLE_END },
+};
+
+static struct cpufreq_frequency_table freq_table_300MHz[] = {
+	{ 0, 102000 },
+	{ 1, 204000 },
+        { 2, 306000 },
+	{ 3, CPUFREQ_TABLE_END },
+};
+
+static struct cpufreq_frequency_table freq_table_900MHz[] = {
+	{ 0,   51000 },
+	{ 1,  102000 },
+        { 2,  204000 }, 
+	{ 3,  306000 },
+	{ 4,  408000 }, 
+        { 5,  510000 },
+	{ 6,  612000 },
+	{ 7,  714000 },
+	{ 8,  816000 },
+	{ 9,  918000 },
+	{10, CPUFREQ_TABLE_END },
 };
 
 static struct cpufreq_frequency_table freq_table_1p0GHz[] = {
@@ -4878,6 +4905,25 @@ static struct cpufreq_frequency_table freq_table_1p4GHz[] = {
 	{14, CPUFREQ_TABLE_END },
 };
 
+static struct cpufreq_frequency_table freq_table_1p5GHz[] = {
+	{ 0,   51000 },
+	{ 1,  102000 },
+        { 2,  204000 }, 
+	{ 3,  306000 },
+	{ 4,  408000 }, 
+        { 5,  510000 },
+	{ 6,  612000 },
+	{ 7,  714000 },
+	{ 8,  816000 },
+	{ 9,  918000 },
+	{10, 1020000 },
+	{11, 1224000 },
+	{12, 1326000 },
+        {13, 1428000 },
+        {14, 1530000 },
+	{15, CPUFREQ_TABLE_END },
+};
+
 static struct cpufreq_frequency_table freq_table_1p6GHz[] = {
 	{ 0,   51000 },
 	{ 1,  102000 },
@@ -4899,11 +4945,15 @@ static struct cpufreq_frequency_table freq_table_1p6GHz[] = {
 
 
 static struct tegra_cpufreq_table_data cpufreq_tables[] = {
-	{ freq_table_300MHz, 0,  1 },
-	{ freq_table_1p0GHz, 2, 10 },
-	{ freq_table_1p3GHz, 2, 15 },
-	{ freq_table_1p4GHz, 2, 15 },
-	{ freq_table_1p6GHz, 2, 16 },
+	{ freq_table_100MHz, 0,  1 },
+        { freq_table_200MHz, 0,  1 },
+        { freq_table_300MHz, 0,  2 },
+        { freq_table_900MHz, 1, 10 },
+	{ freq_table_1p0GHz, 1, 10 },
+	{ freq_table_1p3GHz, 1, 15 },
+	{ freq_table_1p4GHz, 1, 15 },
+        { freq_table_1p5GHz, 1, 15 },
+	{ freq_table_1p6GHz, 1, 16 },
 };
 
 static int clip_cpu_rate_limits(

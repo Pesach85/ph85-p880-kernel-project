@@ -316,7 +316,7 @@ static struct system_edp_entry __initdata tegra_system_edp_map[] = {
  * regulator_cur is found; must be the last one
  */
 static struct tegra_edp_limits edp_default_limits[] = {
-	{85, {1500000, 1500000, 1500000, 1500000} },
+	{100, {1428000, 1428000, 1428000, 1428000} },
 };
 
 
