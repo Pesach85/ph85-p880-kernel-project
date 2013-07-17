@@ -316,7 +316,7 @@ static struct system_edp_entry __initdata tegra_system_edp_map[] = {
  * regulator_cur is found; must be the last one
  */
 static struct tegra_edp_limits edp_default_limits[] = {
-	{100, {1428000, 1428000, 1428000, 1428000} },
+	{85, {1428000, 1428000, 1428000, 1428000} },
 };
 
 
@@ -370,15 +370,15 @@ void __init tegra_init_cpu_edp_limits(unsigned int regulator_mA)
   switch (cpu_process_id) {
     case 0:
       edpl0 = 20;
-      edpl123 = 20;
+      edpl123 = 30;
       break;
     case 1:
       edpl0 = 20;
-      edpl123 = 20;
+      edpl123 = 30;
       break;
     case 2:
-      edpl0 = 10;
-      edpl123 = 20;
+      edpl0 = 20;
+      edpl123 = 30;
       break;
     case 3:
     default:
@@ -397,10 +397,10 @@ void __init tegra_init_cpu_edp_limits(unsigned int regulator_mA)
 		e[j].freq_limits[3] = (unsigned int)(t[i+j].freq_limits[3]+edpl123) * 10000;
 #else
 		e[j].temperature = (int)t[i+j].temperature;
-		e[j].freq_limits[0] = (unsigned int)t[i+j].freq_limits[0] * 10000;
-		e[j].freq_limits[1] = (unsigned int)(t[i+j].freq_limits[1]+10) * 10000;
-		e[j].freq_limits[2] = (unsigned int)(t[i+j].freq_limits[2]+10) * 10000;
-		e[j].freq_limits[3] = (unsigned int)(t[i+j].freq_limits[3]+10) * 10000;
+		e[j].freq_limits[0] = (unsigned int)t[i+j].freq_limits[0]+20 * 10000;
+		e[j].freq_limits[1] = (unsigned int)(t[i+j].freq_limits[1]+30) * 10000;
+		e[j].freq_limits[2] = (unsigned int)(t[i+j].freq_limits[2]+30) * 10000;
+		e[j].freq_limits[3] = (unsigned int)(t[i+j].freq_limits[3]+30) * 10000;
 #endif
 	}
 
