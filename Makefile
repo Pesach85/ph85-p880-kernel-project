@@ -351,8 +351,8 @@ MODFLAGS  = -DMODULE -Os -ffast-math -pipe -march=armv7-a -mfpu=neon -ftree-vect
 CFLAGS_MODULE   = $(MODFLAGS)
 AFLAGS_MODULE   = $(MODFLAGS)
 LDFLAGS_MODULE  =
-CFLAGS_KERNEL	= -O3 -mtune=cortex-a9 -ftree-vectorize -ffast-math -fsingle-precision-constant -march=armv7-a -mfpu=neon -mvectorize-with-neon-quad -ffast-math -pipe
-AFLAGS_KERNEL	= $(CFLAGS_KERNEL)
+CFLAGS_KERNEL	= 
+AFLAGS_KERNEL	= 
 CFLAGS_GCOV	= -fprofile-arcs -ftest-coverage
 
 

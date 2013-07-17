@@ -761,7 +761,7 @@ static ssize_t show_lp_UV_mV_table(struct cpufreq_policy *policy, char *buf)
 {
 
 	char *out = buf;
-	unsigned int freqs_lp [6]={51, 102, 204, 370, 475, 513}; //fake freqs
+	unsigned int freqs_lp [8]={204, 306, 357, 408, 459, 510, 566, 600}; //fake freqs
 	struct clk *cpu_clk_lp = tegra_get_clock_by_name("cpu_lp");
 	int i = cpu_clk_lp->dvfs->num_freqs-3;
 
