@@ -369,21 +369,21 @@ void __init tegra_init_cpu_edp_limits(unsigned int regulator_mA)
 #ifdef CONFIG_CPU_OVERCLOCK
   switch (cpu_process_id) {
     case 0:
-      edpl0 = 20;
-      edpl123 = 30;
+      edpl0 = 30;
+      edpl123 = 40;
       break;
     case 1:
-      edpl0 = 20;
-      edpl123 = 30;
+      edpl0 = 30;
+      edpl123 = 40;
       break;
     case 2:
-      edpl0 = 20;
-      edpl123 = 30;
+      edpl0 = 30;
+      edpl123 = 40;
       break;
     case 3:
     default:
-      edpl0 = 20;
-      edpl123 = 30;
+      edpl0 = 30;
+      edpl123 = 40;
       break;
 }
 #endif
@@ -397,10 +397,10 @@ void __init tegra_init_cpu_edp_limits(unsigned int regulator_mA)
 		e[j].freq_limits[3] = (unsigned int)(t[i+j].freq_limits[3]+edpl123) * 10000;
 #else
 		e[j].temperature = (int)t[i+j].temperature;
-		e[j].freq_limits[0] = (unsigned int)t[i+j].freq_limits[0]+20 * 10000;
-		e[j].freq_limits[1] = (unsigned int)(t[i+j].freq_limits[1]+30) * 10000;
-		e[j].freq_limits[2] = (unsigned int)(t[i+j].freq_limits[2]+30) * 10000;
-		e[j].freq_limits[3] = (unsigned int)(t[i+j].freq_limits[3]+30) * 10000;
+		e[j].freq_limits[0] = (unsigned int)t[i+j].freq_limits[0]+30 * 10000;
+		e[j].freq_limits[1] = (unsigned int)(t[i+j].freq_limits[1]+40) * 10000;
+		e[j].freq_limits[2] = (unsigned int)(t[i+j].freq_limits[2]+40) * 10000;
+		e[j].freq_limits[3] = (unsigned int)(t[i+j].freq_limits[3]+40) * 10000;
 #endif
 	}
 
