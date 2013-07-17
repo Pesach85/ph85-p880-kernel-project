@@ -3675,11 +3675,11 @@ static struct clk_pll_freq_table tegra_pll_x_freq_table[] = {
 	{ 26000000, 1800000000, 900,  13, 1, 8},
 
 	/* 1.7 GHz */
-	{ 12000000, 1683000000, 850,  6,  1, 8},
-	{ 13000000, 1683000000, 915,  7,  1, 8},	/* actual: 1699.2 MHz */
-	{ 16800000, 1683000000, 708,  7,  1, 8},	/* actual: 1699.2 MHz */
-	{ 19200000, 1683000000, 885,  10, 1, 8},	/* actual: 1699.2 MHz */
-	{ 26000000, 1683000000, 850,  13, 1, 8},
+	{ 12000000, 1700000000, 850,  6,  1, 8},
+	{ 13000000, 1700000000, 915,  7,  1, 8},	/* actual: 1699.2 MHz */
+	{ 16800000, 1700000000, 708,  7,  1, 8},	/* actual: 1699.2 MHz */
+	{ 19200000, 1700000000, 885,  10, 1, 8},	/* actual: 1699.2 MHz */
+	{ 26000000, 1700000000, 850,  13, 1, 8},
 
 	/* 1.6 GHz */
 	{ 12000000, 1632000000, 800,  6,  1, 8},
@@ -4451,12 +4451,12 @@ struct clk tegra_list_clks[] = {
 	PERIPH_CLK("uarte_dbg",	"serial8250.0",		"uarte", 66,	0x1c4,	900000000, mux_pllp_clkm,		MUX | DIV_U151 | DIV_U151_UART | PERIPH_ON_APB),
 	PERIPH_CLK_EX("vi",	"tegra_camera",		"vi",	20,	0x148,	470000000, mux_pllm_pllc_pllp_plla,	MUX | DIV_U71 | DIV_U71_INT,	&tegra_vi_clk_ops),
 	PERIPH_CLK("vi_sensor",	"tegra_camera",		"vi_sensor",	20,	0x1a8,	150000000, mux_pllm_pllc_pllp_plla,	MUX | DIV_U71 | PERIPH_NO_RESET),
-	PERIPH_CLK("3d",	"3d",			NULL,	24,	0x158,	600000000, mux_pllm_pllc_pllp_plla,	MUX | DIV_U71 | DIV_U71_INT | DIV_U71_IDLE | PERIPH_MANUAL_RESET),
-	PERIPH_CLK("3d2",       "3d2",			NULL,	98,	0x3b0,	600000000, mux_pllm_pllc_pllp_plla,	MUX | DIV_U71 | DIV_U71_INT | DIV_U71_IDLE | PERIPH_MANUAL_RESET),
-	PERIPH_CLK("2d",	"2d",			NULL,	21,	0x15c,	600000000, mux_pllm_pllc_pllp_plla,	MUX | DIV_U71 | DIV_U71_INT | DIV_U71_IDLE),
-	PERIPH_CLK("epp",	"epp",			NULL,	19,	0x16c,	600000000, mux_pllm_pllc_pllp_plla,	MUX | DIV_U71 | DIV_U71_INT),
-	PERIPH_CLK("mpe",	"mpe",			NULL,	60,	0x170,	600000000, mux_pllm_pllc_pllp_plla,	MUX | DIV_U71 | DIV_U71_INT),
-	PERIPH_CLK("host1x",	"host1x",		NULL,	28,	0x180,	300000000, mux_pllm_pllc_pllp_plla,	MUX | DIV_U71 | DIV_U71_INT),
+	PERIPH_CLK("3d",	"3d",			NULL,	24,	0x158,	700000000, mux_pllm_pllc_pllp_plla,	MUX | DIV_U71 | DIV_U71_INT | DIV_U71_IDLE | PERIPH_MANUAL_RESET),
+	PERIPH_CLK("3d2",       "3d2",			NULL,	98,	0x3b0,	700000000, mux_pllm_pllc_pllp_plla,	MUX | DIV_U71 | DIV_U71_INT | DIV_U71_IDLE | PERIPH_MANUAL_RESET),
+	PERIPH_CLK("2d",	"2d",			NULL,	21,	0x15c,	700000000, mux_pllm_pllc_pllp_plla,	MUX | DIV_U71 | DIV_U71_INT | DIV_U71_IDLE),
+	PERIPH_CLK("epp",	"epp",			NULL,	19,	0x16c,	700000000, mux_pllm_pllc_pllp_plla,	MUX | DIV_U71 | DIV_U71_INT),
+	PERIPH_CLK("mpe",	"mpe",			NULL,	60,	0x170,	700000000, mux_pllm_pllc_pllp_plla,	MUX | DIV_U71 | DIV_U71_INT),
+	PERIPH_CLK("host1x",	"host1x",		NULL,	28,	0x180,	400000000, mux_pllm_pllc_pllp_plla,	MUX | DIV_U71 | DIV_U71_INT),
 	PERIPH_CLK("cve",	"cve",			NULL,	49,	0x140,	250000000, mux_pllp_plld_pllc_clkm,	MUX | DIV_U71), /* requires min voltage */
 	PERIPH_CLK("tvo",	"tvo",			NULL,	49,	0x188,	250000000, mux_pllp_plld_pllc_clkm,	MUX | DIV_U71), /* requires min voltage */
 	PERIPH_CLK_EX("dtv",	"dtv",			NULL,	79,	0x1dc,	250000000, mux_clk_m,			PERIPH_ON_APB,	&tegra_dtv_clk_ops),
@@ -4924,7 +4924,7 @@ static struct cpufreq_frequency_table freq_table_1p5GHz[] = {
 	{15, CPUFREQ_TABLE_END },
 };
 
-static struct cpufreq_frequency_table freq_table_1p6GHz[] = {
+static struct cpufreq_frequency_table freq_table_1p7GHz[] = {
 	{ 0,   51000 },
 	{ 1,  102000 },
         { 2,  204000 }, 
@@ -4940,7 +4940,8 @@ static struct cpufreq_frequency_table freq_table_1p6GHz[] = {
 	{12, 1428000 },
 	{13, 1530000 },
         {14, 1632000 },
-	{15, CPUFREQ_TABLE_END },
+        {15, 1700000 },
+	{16, CPUFREQ_TABLE_END },
 };
 
 
@@ -4953,7 +4954,7 @@ static struct tegra_cpufreq_table_data cpufreq_tables[] = {
 	{ freq_table_1p3GHz, 1, 15 },
 	{ freq_table_1p4GHz, 1, 15 },
         { freq_table_1p5GHz, 1, 15 },
-	{ freq_table_1p6GHz, 1, 16 },
+	{ freq_table_1p7GHz, 1, 18 },
 };
 
 static int clip_cpu_rate_limits(
