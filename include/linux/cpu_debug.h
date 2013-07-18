@@ -11,6 +11,7 @@
 #define CPU_DEBUG_BTHP_LB   0x20
 #define CPU_DEBUG_BTHP_LBX  0x40
 
+<<<<<<< HEAD
 /* unsigned int get_cpu_debug(void); */
 
 /*
@@ -22,6 +23,9 @@ unsigned int get_cpu_debug(void)
 {
 	return CPU_DEBUG_NONE;
 }
+=======
+unsigned int get_cpu_debug(void);
+>>>>>>> ef06eaf... Optimize the hell out of it
 
 #define CPU_DEBUG_PRINTK(flag, fmt, ...)				\
 	if (get_cpu_debug() & flag) {					\
