@@ -58,6 +58,7 @@
 #define DC_COM_PIN_OUTPUT_POLARITY1_INIT_VAL	0x01000000
 #define DC_COM_PIN_OUTPUT_POLARITY3_INIT_VAL	0x0
 
+atomic_t update_frame = ATOMIC_INIT(0);
 
 //                                                                        
 #if defined (CONFIG_PANICRPT)   

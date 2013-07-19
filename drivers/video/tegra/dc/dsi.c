@@ -79,6 +79,9 @@
 #define DSI_LP_OP_WRITE			0x1
 #define DSI_LP_OP_READ			0x2
 
+#define NUM_DSI_INIT_SEQ_DATA 8
+#define NUM_DSI_INIT_SEQ_DATA_BYTE 16
+
 #define DSI_HOST_IDLE_PERIOD		1000
 
 static bool enable_read_debug;
