@@ -761,7 +761,7 @@ static ssize_t show_lp_UV_mV_table(struct cpufreq_policy *policy, char *buf)
 {
 
 	char *out = buf;
-	unsigned int freqs_lp [8]={204, 306, 357, 408, 459, 510, 566, 600}; //fake freqs
+	unsigned int freqs_lp [7]={102, 295, 370, 428, 475, 513, 579, 620}; //fake freqs
 	struct clk *cpu_clk_lp = tegra_get_clock_by_name("cpu_lp");
 	int i = cpu_clk_lp->dvfs->num_freqs-3;
 
@@ -780,12 +780,12 @@ static ssize_t store_lp_UV_mV_table(struct cpufreq_policy *policy, char *buf, si
 	unsigned long volt_cur[cpu_clk_lp->dvfs->num_freqs-3];
 	int ret = 0;
 
-	ret = sscanf(buf, "%lu %lu %lu %lu %lu %lu", &volt_cur[5], &volt_cur[4], &volt_cur[3], &volt_cur[2], &volt_cur[1], &volt_cur[0]);
+	ret = sscanf(buf, "%lu %lu %lu %lu %lu %lu %lu", &volt_cur[6], &volt_cur[5], &volt_cur[4], &volt_cur[3], &volt_cur[2], &volt_cur[1], &volt_cur[0]);
 
-	if (ret != 6)
+	if (ret != 7)
 	return -EINVAL;
 
-	for(i = 0; i < 6; i++){
+	for(i = 0; i < 7; i++){
 		if(volt_cur[i] < 900){
 		printk(KERN_DEBUG "lp_voltage_control: You set too low voltage (%lu) set min to 900mV\n", volt_cur[i]);
 		volt_cur[i] = 900;
@@ -987,9 +987,7 @@ cpufreq_freq_attr_ro(policy_max_freq);
 cpufreq_freq_attr_rw(UV_mV_table);
 cpufreq_freq_attr_rw(lp_UV_mV_table);
 #endif
-#ifdef CONFIG_GPU_OVERCLOCK
 cpufreq_freq_attr_rw(gpu_overclock);
-#endif
 cpufreq_freq_attr_ro(tegra_cpu_variant);
 cpufreq_freq_attr_ro(gpu_cur_freq);
 

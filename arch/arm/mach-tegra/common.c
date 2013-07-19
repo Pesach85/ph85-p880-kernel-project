@@ -30,6 +30,7 @@
 #include <linux/sched.h>
 #include <linux/cpufreq.h>
 #include <linux/of.h>
+#include <linux/sys_soc.h>
 
 #include <asm/hardware/cache-l2x0.h>
 #include <asm/system.h>
@@ -40,6 +41,7 @@
 #include <mach/powergate.h>
 #include <mach/system.h>
 #include <mach/tegra_smmu.h>
+#include <mach/hardware.h>
 
 #include "apbio.h"
 #include "board.h"

@@ -34,8 +34,8 @@
 #include <linux/pm_qos_params.h>
 #include <mach/tegra_usb_modem_power.h>
 
-#define BOOST_CPU_FREQ_MIN	1020000
-#define BOOST_CPU_FREQ_TIMEOUT	2000
+#define BOOST_CPU_FREQ_MIN	1200000
+#define BOOST_CPU_FREQ_TIMEOUT	5000
 
 #define WAKELOCK_TIMEOUT_FOR_USB_ENUM		(HZ * 10)
 #define WAKELOCK_TIMEOUT_FOR_REMOTE_WAKE	(HZ)
@@ -555,6 +555,14 @@ static int __exit tegra_usb_modem_remove(struct platform_device *pdev)
 	return 0;
 }
 
+static void tegra_usb_modem_shutdown(struct platform_device *pdev)
+{
+	struct tegra_usb_modem *modem = platform_get_drvdata(pdev);
+
+	if (modem->ops && modem->ops->stop)
+		modem->ops->stop();
+}
+
 #ifdef CONFIG_PM
 static int tegra_usb_modem_suspend(struct platform_device *pdev,
 				   pm_message_t state)
@@ -585,6 +593,7 @@ static struct platform_driver tegra_usb_modem_power_driver = {
 		   },
 	.probe = tegra_usb_modem_probe,
 	.remove = __exit_p(tegra_usb_modem_remove),
+	.shutdown = tegra_usb_modem_shutdown,
 #ifdef CONFIG_PM
 	.suspend = tegra_usb_modem_suspend,
 	.resume = tegra_usb_modem_resume,
