@@ -623,4 +623,3 @@ THERM_DEBUGFS(tc2);
 THERM_DEBUGFS(passive_delay);
 #endif
 #endif
-

@@ -38,7 +38,7 @@
 #ifdef CONFIG_TEGRA_SKIN
 extern struct thermal_cooling_device *skin_throttle_cdev;
 
-static long skin_throttle_temp = 45000;
+static long skin_throttle_temp = 35000;
 static long polling_period = 1100; /* 1.1 second */
 static long cur_skin_temp;
 static struct workqueue_struct *workqueue;
