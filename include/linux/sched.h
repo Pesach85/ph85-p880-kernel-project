@@ -514,7 +514,7 @@ struct task_cputime {
 struct thread_group_cputimer {
 	struct task_cputime cputime;
 	int running;
-	raw_spinlock_t lock;
+	spinlock_t lock;
 };
 
 #include <linux/rwsem.h>
@@ -2581,7 +2581,7 @@ void thread_group_cputimer(struct task_struct *tsk, struct task_cputime *times);
 
 static inline void thread_group_cputime_init(struct signal_struct *sig)
 {
-	raw_spin_lock_init(&sig->cputimer.lock);
+	spin_lock_init(&sig->cputimer.lock);
 }
 
 /*
