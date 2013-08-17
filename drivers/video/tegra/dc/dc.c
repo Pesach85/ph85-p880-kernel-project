@@ -214,6 +214,7 @@ void dc_set_gamma_lut(void)
 	tegra_dc_update_windows(dcwins, DC_N_WINDOWS);
 	printk("%s end \n" ,__func__);
 }
+
 #endif
 /*                                 */
 
@@ -1542,11 +1543,13 @@ static int tegra_dc_init(struct tegra_dc *dc)
 				lut->b[j]=(u8)(j);
 			}
 		}
+
 		else if(cmdlineRGBvalue.table_type==GAMMA_NV_LUT){
 			win->ppflags |= TEGRA_WIN_PPFLAG_CP_ENABLE;
 			memcpy(&dc->windows[i].lut, &cmdlineRGBvalue.lut,
 					sizeof(dc->windows[i].lut));
 		}
+
 #endif		
 /*                                 */
 		tegra_dc_set_lut(dc, win);

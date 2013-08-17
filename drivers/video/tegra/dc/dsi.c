@@ -79,9 +79,6 @@
 #define DSI_LP_OP_WRITE			0x1
 #define DSI_LP_OP_READ			0x2
 
-#define NUM_DSI_INIT_SEQ_DATA 8
-#define NUM_DSI_INIT_SEQ_DATA_BYTE 16
-
 #define DSI_HOST_IDLE_PERIOD		1000
 
 static bool enable_read_debug;
@@ -179,17 +176,17 @@ const u32 dsi_pkt_seq_reg[NUMOF_PKT_SEQ] = {
 };
 
 const u32 dsi_pkt_seq_video_non_burst_syne[NUMOF_PKT_SEQ] = {
-	PKT_ID0(CMD_VS) | PKT_LEN0(0) | PKT_ID1(CMD_EOT) | PKT_LEN1(7) | PKT_LP,
+	PKT_ID0(CMD_VS) | PKT_LEN0(0) | PKT_ID1(CMD_EOT) | PKT_LEN1(0) | PKT_LP,
 	0,
-	PKT_ID0(CMD_VE) | PKT_LEN0(0) | PKT_ID1(CMD_EOT) | PKT_LEN1(7) | PKT_LP,
+	PKT_ID0(CMD_VE) | PKT_LEN0(0) | PKT_ID1(CMD_EOT) | PKT_LEN1(0) | PKT_LP,
 	0,
-	PKT_ID0(CMD_HS) | PKT_LEN0(0) | PKT_ID1(CMD_EOT) | PKT_LEN1(7) | PKT_LP,
+	PKT_ID0(CMD_HS) | PKT_LEN0(0) | PKT_ID1(CMD_EOT) | PKT_LEN1(0) | PKT_LP,
 	0,
 	PKT_ID0(CMD_HS) | PKT_LEN0(0) | PKT_ID1(CMD_BLNK) | PKT_LEN1(1) |
 	PKT_ID2(CMD_HE) | PKT_LEN2(0),
 	PKT_ID3(CMD_BLNK) | PKT_LEN3(2) | PKT_ID4(CMD_RGB) | PKT_LEN4(3) |
 	PKT_ID5(CMD_BLNK) | PKT_LEN5(4),
-	PKT_ID0(CMD_HS) | PKT_LEN0(0) | PKT_ID1(CMD_EOT) | PKT_LEN1(7) | PKT_LP,
+	PKT_ID0(CMD_HS) | PKT_LEN0(0) | PKT_ID1(CMD_EOT) | PKT_LEN1(0) | PKT_LP,
 	0,
 	PKT_ID0(CMD_HS) | PKT_LEN0(0) | PKT_ID1(CMD_BLNK) | PKT_LEN1(1) |
 	PKT_ID2(CMD_HE) | PKT_LEN2(0),
@@ -198,16 +195,16 @@ const u32 dsi_pkt_seq_video_non_burst_syne[NUMOF_PKT_SEQ] = {
 };
 
 const u32 dsi_pkt_seq_video_non_burst[NUMOF_PKT_SEQ] = {
-	PKT_ID0(CMD_VS) | PKT_LEN0(0) | PKT_ID1(CMD_EOT) | PKT_LEN1(7) | PKT_LP,
+	PKT_ID0(CMD_VS) | PKT_LEN0(0) | PKT_ID1(CMD_EOT) | PKT_LEN1(0) | PKT_LP,
 	0,
-	PKT_ID0(CMD_HS) | PKT_LEN0(0) | PKT_ID1(CMD_EOT) | PKT_LEN1(7) | PKT_LP,
+	PKT_ID0(CMD_HS) | PKT_LEN0(0) | PKT_ID1(CMD_EOT) | PKT_LEN1(0) | PKT_LP,
 	0,
-	PKT_ID0(CMD_HS) | PKT_LEN0(0) | PKT_ID1(CMD_EOT) | PKT_LEN1(7) | PKT_LP,
+	PKT_ID0(CMD_HS) | PKT_LEN0(0) | PKT_ID1(CMD_EOT) | PKT_LEN1(0) | PKT_LP,
 	0,
 	PKT_ID0(CMD_HS) | PKT_LEN0(0) | PKT_ID1(CMD_BLNK) | PKT_LEN1(2) |
 	PKT_ID2(CMD_RGB) | PKT_LEN2(3),
 	PKT_ID3(CMD_BLNK) | PKT_LEN3(4),
-	PKT_ID0(CMD_HS) | PKT_LEN0(0) | PKT_ID1(CMD_EOT) | PKT_LEN1(7) | PKT_LP,
+	PKT_ID0(CMD_HS) | PKT_LEN0(0) | PKT_ID1(CMD_EOT) | PKT_LEN1(0) | PKT_LP,
 	0,
 	PKT_ID0(CMD_HS) | PKT_LEN0(0) | PKT_ID1(CMD_BLNK) | PKT_LEN1(2) |
 	PKT_ID2(CMD_RGB) | PKT_LEN2(3),
@@ -232,20 +229,20 @@ static const u32 dsi_pkt_seq_video_burst[NUMOF_PKT_SEQ] = {
 };
 
 static const u32 dsi_pkt_seq_video_burst_no_eot[NUMOF_PKT_SEQ] = {
-	PKT_ID0(CMD_VS) | PKT_LEN0(0) | PKT_LP,
+	PKT_ID0(CMD_VS) | PKT_LEN0(0) | PKT_ID1(CMD_EOT) | PKT_LEN1(0) | PKT_LP,
 	0,
-	PKT_ID0(CMD_HS) | PKT_LEN0(0) | PKT_LP,
+	PKT_ID0(CMD_HS) | PKT_LEN0(0) | PKT_ID1(CMD_EOT) | PKT_LEN1(0) | PKT_LP,
 	0,
-	PKT_ID0(CMD_HS) | PKT_LEN0(0) | PKT_LP,
-	0,
-	PKT_ID0(CMD_HS) | PKT_LEN0(0) | PKT_ID1(CMD_BLNK) | PKT_LEN1(2)|
-	PKT_ID2(CMD_RGB) | PKT_LEN2(3) | PKT_LP,
-	0,
-	PKT_ID0(CMD_HS) | PKT_LEN0(0) | PKT_LP,
+	PKT_ID0(CMD_HS) | PKT_LEN0(0) | PKT_ID1(CMD_EOT) | PKT_LEN1(0) | PKT_LP,
 	0,
 	PKT_ID0(CMD_HS) | PKT_LEN0(0) | PKT_ID1(CMD_BLNK) | PKT_LEN1(2)|
 	PKT_ID2(CMD_RGB) | PKT_LEN2(3) | PKT_LP,
+	PKT_ID0(CMD_EOT) | PKT_LEN0(0),
+	PKT_ID0(CMD_HS) | PKT_LEN0(0) | PKT_ID1(CMD_EOT) | PKT_LEN1(0) | PKT_LP,
 	0,
+	PKT_ID0(CMD_HS) | PKT_LEN0(0) | PKT_ID1(CMD_BLNK) | PKT_LEN1(2)|
+	PKT_ID2(CMD_RGB) | PKT_LEN2(3) | PKT_LP,
+	PKT_ID0(CMD_EOT) | PKT_LEN0(0),
 };
 
 /* TODO: verify with hw about this format */
@@ -1231,7 +1228,7 @@ static void tegra_dsi_setup_video_mode_pkt_length(struct tegra_dc *dc,
 			DSI_PKT_LEN_4_5_LENGTH_5(0);
 	tegra_dsi_writel(dsi, val, DSI_PKT_LEN_4_5);
 
-	val = DSI_PKT_LEN_6_7_LENGTH_6(0) | DSI_PKT_LEN_6_7_LENGTH_7(0x0f0f);
+	val = DSI_PKT_LEN_6_7_LENGTH_6(0) | DSI_PKT_LEN_6_7_LENGTH_7(0);
 	tegra_dsi_writel(dsi, val, DSI_PKT_LEN_6_7);
 }
 
@@ -2402,90 +2399,6 @@ void tegra_dsi_stop_host_cmd_v_blank_dcs(struct tegra_dc_dsi_data * dsi)
 }
 EXPORT_SYMBOL(tegra_dsi_stop_host_cmd_v_blank_dcs);
 
-/* This function is written to send DCS short write (1 parameter) only.
- * This means the cmd will contain only 1 byte of index and 1 byte of value.
- * The data type ID is fixed at 0x15 and the ECC is calculated based on the
- * data in pdata.
- * The command will be sent by hardware every frame.
- * pdata should contain both the index + value for each cmd.
- * data_len will be the total number of bytes in pdata.
- */
-int tegra_dsi_send_panel_short_cmd(struct tegra_dc *dc, u8 *pdata, u8 data_len)
-{
-	u8 ecc8bits = 0, data_len_orig = 0;
-	u32 val = 0, pkthdr = 0;
-	int err = 0, count = 0;
-	struct tegra_dc_dsi_data *dsi = tegra_dc_get_outdata(dc);
-
-	mutex_lock(&dc->host_lock);
-	mutex_lock(&dc->lock);
-	tegra_dc_hold_dc_out(dc);
-	tegra_dc_io_start(dc);
-	mutex_lock(&dsi->lock);
-
-	if (!tegra_is_clk_enabled(dsi->dsi_clk)||!tegra_is_clk_enabled(dc->clk))
-		goto clean;
-	data_len_orig = data_len;
-	if (pdata != NULL) {
-		while (data_len) {
-			if (data_len >= 2) {
-				pkthdr = (CMD_SHORTW |
-					(((u16 *)pdata)[0]) << 8 | 0x00 << 24);
-				ecc8bits = tegra_dsi_ecc(pkthdr);
-				val = (pkthdr | (ecc8bits << 24));
-				data_len -= 2;
-				pdata += 2;
-				count++;
-			}
-			switch (count) {
-			case 1:
-				tegra_dsi_writel(dsi, val, DSI_INIT_SEQ_DATA_0);
-				break;
-			case 2:
-				tegra_dsi_writel(dsi, val, DSI_INIT_SEQ_DATA_1);
-				break;
-			case 3:
-				tegra_dsi_writel(dsi, val, DSI_INIT_SEQ_DATA_2);
-				break;
-			case 4:
-				tegra_dsi_writel(dsi, val, DSI_INIT_SEQ_DATA_3);
-				break;
-			case 5:
-				tegra_dsi_writel(dsi, val, DSI_INIT_SEQ_DATA_4);
-				break;
-			case 6:
-				tegra_dsi_writel(dsi, val, DSI_INIT_SEQ_DATA_5);
-				break;
-			case 7:
-				tegra_dsi_writel(dsi, val, DSI_INIT_SEQ_DATA_6);
-				break;
-			case 8:
-				tegra_dsi_writel(dsi, val, DSI_INIT_SEQ_DATA_7);
-				break;
-			default:
-				err = 1;
-				break;
-			}
-		}
-	}
-
-	val = DSI_INIT_SEQ_CONTROL_DSI_FRAME_INIT_BYTE_COUNT(data_len_orig * 2)
-		| DSI_INIT_SEQ_CONTROL_DSI_SEND_INIT_SEQUENCE(1);
-	tegra_dsi_writel(dsi, val, DSI_INIT_SEQ_CONTROL);
-
-	if (dc->out->flags & TEGRA_DC_OUT_ONE_SHOT_MODE)
-		tegra_dc_host_trigger(dc);
-
-clean:
-	mutex_unlock(&dsi->lock);
-	tegra_dc_io_end(dc);
-	tegra_dc_release_dc_out(dc);
-	mutex_unlock(&dc->lock);
-	mutex_unlock(&dc->host_lock);
-	return err;
-}
-EXPORT_SYMBOL(tegra_dsi_send_panel_short_cmd);
-
 static int tegra_dsi_bta(struct tegra_dc_dsi_data *dsi)
 {
 	u32 val;
@@ -2988,24 +2901,6 @@ static void tegra_dc_dsi_enable(struct tegra_dc *dc)
 			dev_err(&dc->ndev->dev,
 				"dsi: not able to set to lp mode\n");
 			goto fail;
-		}
-
-		if ( dsi->info.osc_off_cmd ) {
-			err = tegra_dsi_send_panel_cmd(dc, dsi, dsi->info.osc_off_cmd,
-								dsi->info.n_osc_off_cmd);
-			if (err < 0) {
-				dev_err(&dc->ndev->dev,
-					"dsi: error while sending dsi init cmd\n");
-				goto fail;
-			}
-
-			err = tegra_dsi_send_panel_cmd(dc, dsi, dsi->info.osc_on_cmd,
-								dsi->info.n_osc_on_cmd);
-			if (err < 0) {
-				dev_err(&dc->ndev->dev,
-					"dsi: error while sending dsi init cmd\n");
-				goto fail;
-			}
 		}
 
 		err = tegra_dsi_send_panel_cmd(dc, dsi, dsi->info.dsi_init_cmd,
@@ -3601,43 +3496,6 @@ static void tegra_dc_dsi_resume(struct tegra_dc *dc)
 }
 #endif
 
-static void tegra_dc_send_cmd(struct tegra_dc *dc, struct tegra_dsi_cmd *cmd, int n)
-{
-	struct tegra_dc_dsi_data *dsi;
-	int count = 0;
-	int i = 0;
-	u8 short_cmd[NUM_DSI_INIT_SEQ_DATA_BYTE] = {0};
-
-	dsi = tegra_dc_get_outdata(dc);
-
-	for (i = 0 ; i < n ; i++) {
-		struct tegra_dsi_cmd *cur_cmd = &cmd[i];
-		if (cur_cmd->cmd_type == TEGRA_DSI_DELAY_MS) {
-			mdelay(cur_cmd->sp_len_dly.delay_ms);
-			continue;
-		}
-		if (cur_cmd->pdata == NULL) {
-			short_cmd[count << 1] = cur_cmd->sp_len_dly.sp.data0;
-			short_cmd[(count << 1) + 1] = cur_cmd->sp_len_dly.sp.data1;
-			count++;
-			if ((count % NUM_DSI_INIT_SEQ_DATA) == 0 || i == (n-1)) {
-				tegra_dsi_send_panel_short_cmd(dc, short_cmd, ARRAY_SIZE(short_cmd));
-				memset(short_cmd, 0, NUM_DSI_INIT_SEQ_DATA_BYTE);
-				count = 0;
-			}
-		}
-		else {
-			if (count > 0) {
-				tegra_dsi_send_panel_short_cmd(dc, short_cmd, ARRAY_SIZE(short_cmd));
-				count = 0;
-				mdelay(20);
-			}
-			tegra_dsi_start_host_cmd_v_blank_dcs(dsi, cur_cmd);
-			memset(short_cmd, 0, NUM_DSI_INIT_SEQ_DATA_BYTE);
-		}
-	}
-}
-
 struct tegra_dc_out_ops tegra_dc_dsi_ops = {
 	.init = tegra_dc_dsi_init,
 	.destroy = tegra_dc_dsi_destroy,
@@ -3649,5 +3507,4 @@ struct tegra_dc_out_ops tegra_dc_dsi_ops = {
 	.suspend = tegra_dc_dsi_suspend,
 	.resume = tegra_dc_dsi_resume,
 #endif
-	.send_cmd = tegra_dc_send_cmd,
 };

@@ -93,14 +93,12 @@ static struct throttle_table throttle_freqs_tj[] = {
 	      {  620000,  352000,  NO_CAP,  NO_CAP },
 	      {  475000,  352000,  NO_CAP,  NO_CAP },
 	      {  475000,  352000,  NO_CAP,  NO_CAP },
-              {  475000,  352000,  250000,  375000 },
-              {  475000,  352000,  250000,  375000 },
-              {  475000,  247000,  204000,  375000 },
-              {  475000,  247000,  204000,  375000 },
-              {  475000,  247000,  204000,  375000 },
-#if 0 /*                                                               */
+	      {  475000,  352000,  250000,  375000 },
+	      {  475000,  352000,  250000,  375000 },
+	      {  475000,  247000,  204000,  375000 },
+	      {  475000,  247000,  204000,  204000 },
+	      {  475000,  247000,  204000,  204000 },
 	{ CPU_THROT_LOW,  247000,  204000,  102000 },
-#endif
 };
 #endif
 
@@ -115,11 +113,13 @@ static struct throttle_table throttle_freqs_tskin[] = {
 	      {  620000,  352000,  NO_CAP,  NO_CAP },
 	      {  475000,  352000,  NO_CAP,  NO_CAP },
 	      {  475000,  352000,  NO_CAP,  NO_CAP },
-              {  475000,  352000,  250000,  375000 },
-              {  475000,  352000,  250000,  375000 },
-              {  475000,  247000,  204000,  375000 },
-              {  475000,  247000,  204000,  375000 },
-              {  475000,  247000,  204000,  375000 },
+	      {  475000,  352000,  250000,  375000 },
+	      {  475000,  352000,  250000,  375000 },
+	      {  475000,  247000,  204000,  375000 },
+	      {  475000,  247000,  204000,  204000 },
+	      {  475000,  247000,  204000,  204000 },
+	{ CPU_THROT_LOW,  247000,  204000,  102000 },
+
 };
 #endif
 
@@ -140,6 +140,50 @@ static struct balanced_throttle throttle_list[] = {
 #endif
 };
 
+#ifdef CONFIG_TEGRA_SKIN_THROTTLE
+/* Skin timer trips */
+static struct tegra_thermal_timer_trip skin_therm_timer_trips[] = {
+	/* duration,  temp, hysteresis */
+	{       600, 48000, 5000 },
+	{      1800, 45000, 5000 },
+	{        -1, 43000, 8000 }, /* The duration -1 equals infinity. */
+};
+
+/* Skin active throttle size must be one. */
+static struct throttle_table throttle_freqs_tskin_active_0[] = {
+	      /*    CPU,    CBUS,    SCLK,     EMC */
+	      { 1200000,  NO_CAP,  NO_CAP,  NO_CAP },
+};
+
+static struct throttle_table throttle_freqs_tskin_active_1[] = {
+	      /*    CPU,    CBUS,    SCLK,     EMC */
+	      { 1000000,  NO_CAP,  NO_CAP,  NO_CAP },
+};
+
+static struct skin_therm_active_throttle skin_therm_actives[] = {
+	{
+		.bthrot = {
+			.id = BALANCED_THROTTLE_ID_SKIN + 1,
+			.throt_tab_size =
+				ARRAY_SIZE(throttle_freqs_tskin_active_0),
+			.throt_tab = throttle_freqs_tskin_active_0,
+		},
+		.trip_temp = 33000,
+		.hysteresis = 0,
+	},
+	{
+		.bthrot = {
+			.id = BALANCED_THROTTLE_ID_SKIN + 2,
+			.throt_tab_size =
+				ARRAY_SIZE(throttle_freqs_tskin_active_1),
+			.throt_tab = throttle_freqs_tskin_active_1,
+		},
+		.trip_temp = 38000,
+		.hysteresis = 0,
+	},
+};
+#endif
+
 /* All units are in millicelsius */
 static struct tegra_thermal_data thermal_data = {
 	.shutdown_device_id = THERMAL_DEVICE_ID_NCT_EXT,
@@ -159,39 +203,42 @@ static struct tegra_thermal_data thermal_data = {
 #endif
 #ifdef CONFIG_TEGRA_SKIN_THROTTLE
 	.skin_device_id = THERMAL_DEVICE_ID_SKIN,
-	.temp_throttle_skin = 47000,
-        .tc1_skin = 5,
-        .tc2_skin = 1,
-        .passive_delay_skin = 4000,
-        .skin_temp_offset = 9793,
-        .skin_period = 1100,
+	.temp_throttle_skin = 43000,
+	.skin_timer_trip_data = {
+		.trips = skin_therm_timer_trips,
+		.trip_size = ARRAY_SIZE(skin_therm_timer_trips),
+	},
+	.tc1_skin = 5,
+	.tc2_skin = 1,
+	.passive_delay_skin = 5000,
+
+	.skin_temp_offset = 9793,
+	.skin_period = 1100,
 	.skin_devs_size = 2,
-        .skin_devs = {
-                {
-                        THERMAL_DEVICE_ID_NCT_EXT,
-                        {
-                                2, 1, 1, 1,
-                                1, 1, 1, 1,
-                                1, 1, 1, 0,
-                                1, 1, 0, 0,
-                                0, 0, -1, -7
-                        }
-                },
-                {
-                        THERMAL_DEVICE_ID_NCT_INT,
-                        {
-                                -11, -7, -5, -3,
-                                -3, -2, -1, 0,
-                                0, 0, 1, 1,
-                                1, 2, 2, 3,
-                                4, 6, 11, 18
-                        }
-                },
-        },
+	.skin_devs = {
+		{
+			THERMAL_DEVICE_ID_NCT_EXT,
+			{
+				2, 1, 1, 1,
+				1, 1, 1, 1,
+				1, 1, 1, 0,
+				1, 1, 0, 0,
+				0, 0, -1, -7
+			}
+		},
+		{
+			THERMAL_DEVICE_ID_NCT_INT,
+			{
+				-11, -7, -5, -3,
+				-3, -2, -1, 0,
+				0, 0, 1, 1,
+				1, 2, 2, 3,
+				4, 6, 11, 18
+			}
+		},
+	},
 #endif
 };
-
-
 
 static __initdata struct tegra_clk_init_table x3_clk_init_table[] = {
 	/* name		parent		rate		enabled */
