@@ -26,10 +26,10 @@
  */
 
 /* in kHz */
-#define BOOST_CPU_FREQ_MIN	1683000
-#define CAP_CPU_FREQ_MAX	1683000
+#define BOOST_CPU_FREQ_MIN	1700000
+#define CAP_CPU_FREQ_MAX	1700000
 #define T3_CPU_MIN_FREQ         51000
-#define T3_LP_MAX_FREQ     	612000
+#define T3_LP_MAX_FREQ     	650000
 
 extern unsigned int tegra_pmqos_boost_freq;
 extern unsigned int tegra_pmqos_cap_freq;

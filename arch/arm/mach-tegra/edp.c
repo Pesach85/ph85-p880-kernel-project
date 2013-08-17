@@ -311,7 +311,7 @@ static struct system_edp_entry __initdata tegra_system_edp_map[] = {
  * regulator_cur is found; must be the last one
  */
 static struct tegra_edp_limits edp_default_limits[] = {
-	{85, {1000000, 1000000, 1000000, 1000000} },
+	{85, {1200000, 1200000, 1200000, 1200000} },
 };
 
 
@@ -362,10 +362,10 @@ void __init tegra_init_cpu_edp_limits(unsigned int regulator_mA)
 
 	for (j = 0; j < edp_limits_size; j++) {
 		e[j].temperature = (int)t[i+j].temperature;
-		e[j].freq_limits[0] = (unsigned int)t[i+j].freq_limits[0] * 10000;
-		e[j].freq_limits[1] = (unsigned int)t[i+j].freq_limits[1] * 10000;
-		e[j].freq_limits[2] = (unsigned int)t[i+j].freq_limits[2] * 10000;
-		e[j].freq_limits[3] = (unsigned int)t[i+j].freq_limits[3] * 10000;
+		e[j].freq_limits[0] = ((unsigned int)t[i+j].freq_limits[0]+20) * 10000;
+		e[j].freq_limits[1] = ((unsigned int)t[i+j].freq_limits[1]+30) * 10000;
+		e[j].freq_limits[2] = ((unsigned int)t[i+j].freq_limits[2]+30) * 10000;
+		e[j].freq_limits[3] = ((unsigned int)t[i+j].freq_limits[3]+30) * 10000;
 	}
 
 	if (edp_limits != edp_default_limits)
