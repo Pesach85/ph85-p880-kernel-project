@@ -200,12 +200,12 @@ static void rev_sku_to_speedo_ids(int rev, int sku)
 		case 0x81: /* T30 */
 			switch (package_id) {
 			case 1: /* MID => T30 */
-				cpu_speedo_id = 4;
+				cpu_speedo_id = 5;
 				soc_speedo_id = 2;
 				threshold_index = 7;
 				break;
 			case 2: /* DSC => AP33 */
-				cpu_speedo_id = 4;
+				cpu_speedo_id = 5;
 				soc_speedo_id = 1;
 				threshold_index = 7;
 				break;
@@ -540,7 +540,7 @@ int tegra_package_id(void)
  */
 static const int cpu_speedo_nominal_millivolts[] =
 /* speedo_id 0,    1,    2,    3,    4,    5,    6,    7,    8,   9,  10,  11,   12,    13,  14,  15 */
-	{ 1125, 1150, 1150, 1150, 1237, 1237, 1237, 1150, 1150, 1007, 916, 850, 1237, 1237, 950, 900};
+	{ 1125, 1150, 1150, 1150, 1275, 1275, 1275, 1150, 1150, 1007, 916, 850, 1275, 1237, 950, 900};
 
 int tegra_cpu_speedo_mv(void)
 {
